@@ -1,4 +1,4 @@
-name: Create Release - Dev
+name: Create Release - Stable
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ jobs:
     - uses: actions/checkout@v3.6.0
       with:
         repository: "XboxEmulationHub/XBSX2"
-        ref: "rewrite"
+        ref: "main"
         fetch-depth: 0
         submodules: false
 
@@ -22,14 +22,14 @@ jobs:
     - name: Create Dependencies Archive
       shell: cmd
       run: |
-        "C:\Program Files\7-Zip\7z.exe" a xbsx2-dependencies-dev.7z .\deps
+        "C:\Program Files\7-Zip\7z.exe" a xbsx2-dependencies-stable.7z .\deps
 
     - name: Create Release
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
         repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest-windows-dependencies-dev"
-        prerelease: true
-        title: "Latest Dependencies Build - Dev"
+        automatic_release_tag: "latest-windows-dependencies-stable"
+        prerelease: false
+        title: "Latest Dependencies Build - Stable"
         files: |
-          xbsx2-dependencies-dev.7z
+          xbsx2-dependencies-stable.7z
